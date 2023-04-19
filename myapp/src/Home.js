@@ -1,24 +1,30 @@
-import { useState , useEffect} from "react";
+import { useEffect, useState } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([
-    { title: 'My new website', body: 'lorem ipsum...', author: 'adesh', id: 1 },
+    { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
     { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-    { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'adesh', id: 3 }
+    { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
   ])
 
-  const handleDelete=(id)=>{
-    const newblogs=blogs.filter(blog=>blog.id!==id);
-    setBlogs(newblogs);
+  const [name, setName] = useState('adesh');
+
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter(blog => blog.id !== id);
+    setBlogs(newBlogs);
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     console.log('use effect ran');
     console.log(blogs);
-  })
+  }, [name])
+
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+      <button onClick={() => setName('gaurav')}>change name</button>
+    <p>{name}</p>
     </div>
   );
 }
