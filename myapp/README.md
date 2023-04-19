@@ -2,9 +2,33 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## about useEffect
-In React, the useEffect hook is used to handle side effects in functional components. Side effects are actions that take place outside of the component's render cycle, such as fetching data from an API, manipulating the DOM, or subscribing to events.
+In React, the useEffect hook takes an optional array of dependencies as its second argument. This array is used to specify the variables that the useEffect callback function depends on.
 
-The useEffect hook takes two arguments: a callback function and an optional array of dependencies. The callback function is executed after the component has rendered and the DOM has been updated. The dependencies array specifies the variables that the callback function depends on. If any of the dependencies change, the callback function is re-executed.
+When the component mounts or updates, React checks the dependencies array to determine whether the useEffect callback function should be executed. If any of the variables in the dependencies array have changed since the previous render cycle, the useEffect callback function is executed. If none of the variables have changed, the useEffect callback function is skipped.
+
+If the dependencies array is empty, the useEffect callback function will only be executed once, when the component mounts. This is useful for performing one-time setup tasks, such as setting up event listeners or fetching data from an API.
+
+If you want the useEffect callback function to be executed whenever the component updates, regardless of whether any variables have changed, you can omit the dependencies array altogether. This is generally not recommended, as it can lead to unnecessary re-renders and performance issues.
+
+import { useEffect, useState } from 'react';
+
+function MyComponent(props) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.example.com/data?query=${props.query}`)
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, [props.query]);
+
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  );
+}
 
 
 ## Available Scripts
@@ -16,47 +40,3 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests].
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
