@@ -1,6 +1,11 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## about useEffect
+In React, the useEffect hook is used to handle side effects in functional components. Side effects are actions that take place outside of the component's render cycle, such as fetching data from an API, manipulating the DOM, or subscribing to events.
+
+The useEffect hook takes two arguments: a callback function and an optional array of dependencies. The callback function is executed after the component has rendered and the DOM has been updated. The dependencies array specifies the variables that the callback function depends on. If any of the dependencies change, the callback function is re-executed.
+
 
 ## Available Scripts
 
