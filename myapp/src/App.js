@@ -5,7 +5,7 @@ function App() {
   const title='welcome to react';
   const like=50;
   const link="http://www.google.com";
-  var person=['adesh','dk'];
+
   return (
     
     <div className="App">
